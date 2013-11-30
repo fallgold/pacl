@@ -1,7 +1,7 @@
 Pacl, A acl Extension for PHP
 
 简介
-    Pacl是一个C语言开发的php权限控制列表模块，实现基于配置的web系统权限管理。配置可用ini文件，php变量及字符串等形式。pacl配置简单、灵活，执行效率高。权限列表可进一步序列化加速。
+    Pacl是一个C语言开发的php权限管理模块，实现基于配置的web系统权限管理。配置可使用ini文件、php文件或字符串等形式。pacl配置简单、灵活。权限列表可进一步序列化加速。
 
 	其中：
 		acl模块基于phalcon\\acl (http://phalconphp.com/). 
@@ -14,10 +14,18 @@ usage:
 	var_dump($acl->check("admin", "album", "delete"));
 ?>
 
+
 acl.rule.ini (更多参考：tests/acl.rule.ini)：
+
 [guest]
 allow = "user.login|error.*|demo.*"
+
 [user:guest]
 allow = "album.index|album.list|album.show|group.index|group.list|group.show"
+
+[manager:user]
+allow = "album.*"
+deny = "album.delete"
+
 [admin]
 allow = "*"
